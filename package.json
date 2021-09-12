@@ -1,0 +1,26 @@
+{
+  "name": "Site_DevAppCorp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CeMenezesJunior/DevAppCorp_Final.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CeMenezesJunior/DevAppCorp_Final/issues"
+  },
+  "homepage": "https://github.com/CeMenezesJunior/DevAppCorp_Final#readme",
+  "dependencies": {
+    "next": "^11.1.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "styled-components": "^5.3.1"
+  }
+}
