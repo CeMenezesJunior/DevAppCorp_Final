@@ -1,8 +1,5 @@
-import Head from "next/head"
-import Link from "next/link"
 import router, { useRouter } from "next/router"
 import { useState } from "react"
-import axios from "axios"
 
 function CriarEditarVolume({ ListaVolumes }){
     const router = useRouter()
@@ -23,7 +20,7 @@ function CriarEditarVolume({ ListaVolumes }){
         const res = await fetch('https://uff-devappcorp-api.herokuapp.com/volume',requestOption)
         const volume = await res.json()
         console.log(volume)
-        router.push('/')
+        router.back()
     }
 
     function handleChange(evt){
