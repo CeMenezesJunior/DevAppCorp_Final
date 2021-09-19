@@ -15,7 +15,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
   }
   body {
-    background-color: #FFFFFF;
+    background-color: #282a36;
     margin: auto;
   }
   h1,
@@ -41,17 +41,19 @@ const GlobalStyle = createGlobalStyle`
     margin-left: 40%;
     text-align: center;
     width: 300px;
+    padding: 10px;
   }
   .postsContainer__post {
-    border: 3px solid #ffb86c;
+    border: 1px solid red;
     width: 300px;
     margin-bottom: 15px;
     text-align: center;
+    padding: 10px;
     a {
       font-weight: bold;
     }
     p{
-      color: #f8f8f2;
+      color: white;
       margin-bottom: 20px;
     }
   }
@@ -59,13 +61,30 @@ const GlobalStyle = createGlobalStyle`
     margin-bottom: 110px;
     margin-left: 20px;
   }
-  .botaoPrincipal{
+  .botaoDeletar{
     padding: 10px 20px 10px 20px;
     border: 1px solid red;
     background-color: red;
     color: white;
     border-radius: 10%;
   }
+
+  .botaoPrincipal{
+    padding: 10px 20px 10px 20px;
+    border: 1px solid blue;
+    background-color: blue;
+    color: white;
+    border-radius: 10%;
+  }
+
+  .botaoCriar{
+    padding: 10px 20px 10px 20px;
+    border: 1px solid yellow;
+    background-color: yellow;
+    color: red;
+    border-radius: 10%;
+  }
+
   .descricao{
     margin-left: 10%;
   }

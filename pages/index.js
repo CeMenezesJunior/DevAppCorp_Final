@@ -1,18 +1,27 @@
 import Head from "next/head"
-import Link from "next/link"
 import { useRouter, UseRouter } from "next/router"
 
 function Home(props){
     const router = useRouter()
+
+    const DeleteVolume = async (vol) => {
+        const requestOption = {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify( vol )
+        }
+        await fetch('https://uff-devappcorp-api.herokuapp.com/volume',requestOption)
+    }
+
     return (
-        <div style={{backgroundColor:"green"}}>
+        <div>
             <Head>
                 <title>Página Inicial</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                 <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/46033513?v=4"/>
             </Head>
             
-                <button onClick={()=> router.push({
+                <button className="botaoCriar" onClick={()=> router.push({
                                         pathname:'/CriarEditarVolume/[id]',
                                         query: {id:0}
                                         })}>Criar Volume</button>
@@ -27,15 +36,17 @@ function Home(props){
                                 <p>
                                     { volume.sigla }
                                 </p>
-                                    <button onClick={()=> router.push({
+                                <div>
+                                    <button className="botaoPrincipal" onClick={()=> router.push({
                                         pathname:'/VolumeDetalhe/[id]',
                                         query: {id:volume.id}
                                     })}>
                                         Detalhes
                                     </button>
-                                <button>
-                                    Excluir
-                                </button>
+                                    <form onSubmit={async() => {await DeleteVolume(volume)}}>
+                                        <input className="botaoDeletar" type="submit" value="Deletar"></input>
+                                    </form>
+                                </div>
                             </article>
                         )
                     })

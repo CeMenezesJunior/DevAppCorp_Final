@@ -8,6 +8,15 @@ function Detalhe_Volume(props){
     const volume = props.props.volumes.find(element => element.id === id)
     const artigos = props.props.artigos.filter(element => element.volume.id === id)
     
+    const DeleteArtigo = async (artigo) => {
+        const requestOption = {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify( artigo )
+        }
+        await fetch('https://uff-devappcorp-api.herokuapp.com/artigo',requestOption)
+    }
+
     return(
         <div>
 
@@ -18,42 +27,45 @@ function Detalhe_Volume(props){
             </Head>
 
             <p>Volume</p>
-            <p style={{color:"black"}}>{id}</p>
-            <p style={{color:"black"}}>{volume.sigla}</p>
-            <button onClick={()=> router.push({
+            <p>{id}</p>
+            <p>{volume.sigla}</p>
+            <button className="botaoCriar" onClick={()=> router.push({
                                         pathname:'/CriarEditarVolume/[id]',
                                         query: {id:volume.id}
                                     })}>Editar volume</button>
             <Link href="/">
-                <button>Tela principal</button>
+                <button className="botaoPrincipal">Tela principal</button>
             </Link>
             
-            <button onClick={()=> router.push({
+            <button className="botaoCriar" onClick={()=> router.push({
                                         pathname:'/CriarEditarArtigo/[id]/[volumeid]',
                                         query: {id:0,volumeid:volume.id}
                                     })}>Criar artigo</button>
             
+            <div className="postsContainer">
+            <p> Artigos relacionados</p>
             {
                 artigos.map((artigo)=>{
                     return(
                         <article className="postsContainer__post">
-                            <p style={{color:"black"}}>
+                            <p>
                                 {artigo.tituloOr}
                             </p>
-                            <button onClick={()=> router.push({
+                            <button className="botaoPrincipal" onClick={()=> router.push({
                                         pathname:'/ArtigoDetalhe/[id]',
                                         query: {id:artigo.id}
                                     })}>
                                         Detalhes
                             </button>
-                            <button>
-                                Excluir
-                            </button>
+                            <form onSubmit={async() => {await DeleteArtigo(artigo)}}>
+                                <input className="botaoDeletar" type="submit" value="Deletar"></input>
+                            </form>
 
                         </article>
                     )
                 })
             }
+            </div>
             
         </div>
     )

@@ -2,10 +2,20 @@ import Head from "next/head"
 import Link from "next/link"
 import { useRouter } from "next/router"
 
-function Detalhe_Artigo({ ListaArtigos }){
+function Detalhe_Artigo(props){
     const router = useRouter()
     const id = getArtigo()
-    const artigo = ListaArtigos.find(element=> element.id === id)
+    const artigo = props.props.artigos.find(element=> element.id === id)
+    const autores = props.props.autores.filter(element=> element.artigo.id === id)
+
+    const DeleteAutor = async (autor) => {
+        const requestOption = {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify( autor )
+        }
+        await fetch('https://uff-devappcorp-api.herokuapp.com/autor',requestOption)
+    }
 
     return(
         <div>
@@ -31,6 +41,27 @@ function Detalhe_Artigo({ ListaArtigos }){
                                         pathname:'/CriarEditarAutor/[id]/[artigoid]',
                                         query: {id:0,artigoid:artigo.id}
                                     })}>Criar autor</button>
+
+            {
+                autores.map((autor)=>{
+                    return(
+                        <article className="postsContainer__post">
+                            <p style={{color:"black"}}>
+                                {autor.firstName} {autor.lastName}
+                            </p>
+                            <button onClick={()=> router.push({
+                                        pathname:'/AutorDetalhe/[id]',
+                                        query: {id:autor.id}
+                                    })}>
+                                        Detalhes
+                            </button>
+                            <form onSubmit={async() => {await DeleteAutor(autor)}}>
+                                <input type="submit" value="Deletar"></input>
+                            </form>
+                        </article>  
+                    )
+                })
+            }
             
         </div>
     )
@@ -44,8 +75,16 @@ export function getArtigo(){
 
 Detalhe_Artigo.getInitialProps = async (ctx) =>{
     const res = await fetch('https://uff-devappcorp-api.herokuapp.com/artigo')
-    const artigos = await res.json()  
-    return {ListaArtigos:artigos}
+    const artigos = await res.json()
+    
+    const resAutores = await fetch('https://uff-devappcorp-api.herokuapp.com/autor')
+    const autores = await resAutores.json()
+
+    return{
+        props: {
+            artigos, autores, 
+        },
+    }
 }
 
 export default Detalhe_Artigo
