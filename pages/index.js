@@ -36,7 +36,7 @@ function Home(props){
                                 <p>
                                     { volume.sigla }
                                 </p>
-                                <div>
+                                <div className="botoesLista">
                                     <button className="botaoPrincipal" onClick={()=> router.push({
                                         pathname:'/VolumeDetalhe/[id]',
                                         query: {id:volume.id}

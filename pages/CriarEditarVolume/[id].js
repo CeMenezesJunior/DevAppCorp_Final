@@ -34,7 +34,7 @@ function CriarEditarVolume({ ListaVolumes }){
     return(
     <div>
         <h4>Criar ou editar volume</h4>
-        <form onSubmit={async () => {await CriaOuEditaVolume(vol)}}>
+        <form className="formsContainer" onSubmit={async () => {await CriaOuEditaVolume(vol)}}>
             <label>
                 Sigla
                 <input type="text" name="sigla" defaultValue={vol.sigla} onChange={handleChange}/>
@@ -51,6 +51,7 @@ function CriarEditarVolume({ ListaVolumes }){
                 descricaoEN
                 <textarea defaultValue={vol.descricaoEN} name="descricaoEN" onChange={handleChange}></textarea>
             </label>
+            <br/>
             <label>
                 descricaoPT
                 <textarea defaultValue={vol.descricaoPT} name="descricaoPT" onChange={handleChange}></textarea>

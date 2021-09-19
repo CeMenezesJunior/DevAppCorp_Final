@@ -8,7 +8,7 @@ function CriarEditarArtigo(props){
     const  volume  = props.props.volumes.find ( element => element.id === volumeId)
     
     
-    var artigo = {order:0,idioma:"",tituloOr:"",tituloIn:"",resumo:"",keyWordOr:"",keyWordIn:"",numPage:0,volume:volume}
+    var artigo = {ordem:"",idioma:"",tituloOr:"",tituloIn:"",resumo:"",keyWordOr:"",keyWordIn:"",numPag:"",volume:volume}
     if(id >= 1){
          artigo  = props.props.artigos.find(element => element.id === id)
     }
@@ -39,10 +39,10 @@ function CriarEditarArtigo(props){
     return(
     <div>
         <h4>Criar ou editar artigo</h4>
-        <form onSubmit={async () => {await CriaOuEditaArtigo(art)}}>
+        <form className="formsContainer" onSubmit={async () => {await CriaOuEditaArtigo(art)}}>
             <label>
                 Order
-                <input type="number" name="order" defaultValue={art.order} onChange={handleChange} min="1"/>
+                <input type="text" name="ordem" defaultValue={art.ordem} onChange={handleChange} min="1"/>
             </label>
 
             <label>
@@ -77,7 +77,7 @@ function CriarEditarArtigo(props){
 
             <label>
                 Número de páginas
-                <input type="number" name="numPage" defaultValue={art.numPage} onChange={handleChange} min="1"/>
+                <input type="text" name="numPag" defaultValue={art.numPag} onChange={handleChange} min="1"/>
             </label>
             
             <input type="submit" value="Enviar"></input>

@@ -37,8 +37,16 @@ const GlobalStyle = createGlobalStyle`
   p{
     color: #f8f8f2;
   }
+  .detalheContainer{
+    text-align: center;
+    padding: 20px;
+    p{
+      font-weight: bold;
+    }
+  }
+
   .postsContainer {
-    margin-left: 40%;
+    margin-left: 38%;
     text-align: center;
     width: 300px;
     padding: 10px;
@@ -67,6 +75,34 @@ const GlobalStyle = createGlobalStyle`
     background-color: red;
     color: white;
     border-radius: 10%;
+  }
+
+  .formsContainer{
+    text-align: left;
+    border: 1px solid black;
+    width: 500px;
+    margin-left: 30%;
+    label{
+      color: white;
+    }
+    input{
+      display: flex;
+      flex-direction: column-reverse;
+      position: relative;
+      margin-top: 10px;
+      width: 98%;
+    }
+    textarea{
+      margin-top: 10px;
+      width: 98%;
+      height: 100px;
+    }
+  }
+
+  .botoesLista{
+    display: flex;
+    flex-direction: row;
+    margin-left: 20%;
   }
 
   .botaoPrincipal{

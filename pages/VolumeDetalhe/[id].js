@@ -7,7 +7,18 @@ function Detalhe_Volume(props){
     const id = getVolume()
     const volume = props.props.volumes.find(element => element.id === id)
     const artigos = props.props.artigos.filter(element => element.volume.id === id)
-    
+    artigos.sort(function(a ,b){
+        if(a.ordem<b.ordem){
+            return -1
+        }
+        if(a.ordem>b.ordem){
+            return 1
+        }
+        else{
+            return 0
+        }
+    })
+
     const DeleteArtigo = async (artigo) => {
         const requestOption = {
             method: 'DELETE',
@@ -25,23 +36,28 @@ function Detalhe_Volume(props){
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                 <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/46033513?v=4"/>
             </Head>
-
-            <p>Volume</p>
-            <p>{id}</p>
-            <p>{volume.sigla}</p>
-            <button className="botaoCriar" onClick={()=> router.push({
-                                        pathname:'/CriarEditarVolume/[id]',
-                                        query: {id:volume.id}
-                                    })}>Editar volume</button>
-            <Link href="/">
-                <button className="botaoPrincipal">Tela principal</button>
-            </Link>
-            
-            <button className="botaoCriar" onClick={()=> router.push({
-                                        pathname:'/CriarEditarArtigo/[id]/[volumeid]',
-                                        query: {id:0,volumeid:volume.id}
-                                    })}>Criar artigo</button>
-            
+            <div className="detalheContainer">
+                <p>Volume</p>
+                <p>Id: {id}</p>
+                <p>Sigla: {volume.sigla}</p>
+                <p>Número Evento: {volume.numEvento}</p>
+                <p>Data Inicio: {volume.dataInicio}</p>
+                <p>Descrição em Inglês: {volume.descricaoEN}</p>
+                <p>Descrição em Português: {volume.descricaoPT}</p>
+                <button className="botaoCriar" onClick={()=> router.push({
+                                            pathname:'/CriarEditarVolume/[id]',
+                                            query: {id:volume.id}
+                                        })}>Editar volume</button>
+                <Link href="/">
+                    <button className="botaoPrincipal">Tela principal</button>
+                </Link>
+                
+                <button className="botaoCriar" onClick={()=> router.push({
+                                            pathname:'/CriarEditarArtigo/[id]/[volumeid]',
+                                            query: {id:0,volumeid:volume.id}
+                                        })}>Criar artigo</button>
+                
+            </div>
             <div className="postsContainer">
             <p> Artigos relacionados</p>
             {
@@ -51,16 +67,17 @@ function Detalhe_Volume(props){
                             <p>
                                 {artigo.tituloOr}
                             </p>
-                            <button className="botaoPrincipal" onClick={()=> router.push({
-                                        pathname:'/ArtigoDetalhe/[id]',
-                                        query: {id:artigo.id}
-                                    })}>
-                                        Detalhes
-                            </button>
-                            <form onSubmit={async() => {await DeleteArtigo(artigo)}}>
-                                <input className="botaoDeletar" type="submit" value="Deletar"></input>
-                            </form>
-
+                            <div className="botoesLista">
+                                <button className="botaoPrincipal" onClick={()=> router.push({
+                                            pathname:'/ArtigoDetalhe/[id]',
+                                            query: {id:artigo.id}
+                                        })}>
+                                            Detalhes
+                                </button>
+                                <form onSubmit={async() => {await DeleteArtigo(artigo)}}>
+                                    <input className="botaoDeletar" type="submit" value="Deletar"></input>
+                                </form>
+                            </div>
                         </article>
                     )
                 })

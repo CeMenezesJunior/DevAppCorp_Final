@@ -8,7 +8,7 @@ function CriarEditarAutor(props){
     const  artigo  = props.props.artigos.find ( element => element.id === artigoId)
     
     
-    var autor = {order:0,firstName:"",middletName:"",lastName:"",afiliacaoOr:"",afiliacaoIn:"",pais:"",orcIn:"",artigo:artigo}
+    var autor = {ordem:"",firstName:"",middletName:"",lastName:"",email:"",afiliacaoOr:"",afiliacaoIn:"",pais:"",orcIn:"",artigo:artigo}
     if(id >= 1){
          autor  = props.props.autores.find(element => element.id === id)
     }
@@ -39,10 +39,10 @@ function CriarEditarAutor(props){
     return(
     <div>
         <h4>Criar ou editar autor</h4>
-        <form onSubmit={async () => {await CriaOuEditaAutor(aut)}}>
+        <form className="formsContainer" onSubmit={async () => {await CriaOuEditaAutor(aut)}}>
             <label>
                 Order
-                <input type="number" name="order" defaultValue={aut.order} onChange={handleChange} min="1"/>
+                <input type="text" name="ordem" defaultValue={aut.ordem} onChange={handleChange} min="1"/>
             </label>
 
             <label>
@@ -53,6 +53,11 @@ function CriarEditarAutor(props){
             <label>
                 Nome do meio
                 <input type="text" name="middleName" defaultValue={aut.middleName} onChange={handleChange}/>
+            </label>
+
+            <label>
+                E-mail
+                <input type="email" name="email" defaultValue={aut.email} onChange={handleChange}/>
             </label>
 
             <label>
